@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  api:
+    build:
+      context: .docker/elixir
+    ports:
+      - 4000:4000
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    networks:
+      - api_web
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: elixir
+    ports:
+      - "3306:3306"
+    volumes:
+      - .docker/db:/var/lib/mysql
+    networks:
+      - api_web
+
+networks:
+  api_web:
