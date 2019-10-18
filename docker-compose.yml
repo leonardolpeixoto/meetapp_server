@@ -3,26 +3,30 @@ version: "3"
 services:
   api:
     build:
-      context: .docker/elixir
+      context: .
+      dockerfile: .docker/elixir/Dockerfile
+    container_name: elixir_api
     ports:
       - 4000:4000
     volumes:
-      - .:/app
+      - ./src:/app
     depends_on:
       - db
     networks:
       - api_web
+
   db:
-    image: mysql:5.7
+    image: postgres:12-alpine
+    container_name: elixir_db
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: elixir
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: elixr
     ports:
-      - "3306:3306"
+      - 5432:5432
     volumes:
       - .docker/db:/var/lib/mysql
     networks:
       - api_web
 
-networks:
+networks: 
   api_web:

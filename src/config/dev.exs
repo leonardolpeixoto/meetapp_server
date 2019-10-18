@@ -40,7 +40,7 @@ config :phoenix, :stacktrace_depth, 20
 config :src, Src.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "postgres",
-  database: "src_dev",
-  hostname: "localhost",
+  password: "root",
+  database: "elixr",
+  hostname: "elixir_db",
   pool_size: 10
